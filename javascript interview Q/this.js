@@ -84,7 +84,10 @@ setTimeout(myCat.logInfo.bind(Pet), 1000);
  * 
 **************/
 
-function Pet(type, legs) {
+/*********
+ * 
+ * 
+ function Pet(type, legs) {
   this.type = type;
   this.legs = legs;
 
@@ -97,3 +100,45 @@ function Pet(type, legs) {
 const myCat = new Pet("Cat", 4);
 // logs "The Cat has 4 legs"
 setTimeout(myCat.logInfo, 1000);
+*
+*
+*
+*****************/
+
+/**********
+ * 
+ *
+ *
+const rabbit = { name: "White Rabbit" };
+
+function concatName(string) {
+  console.log(this === rabbit); // {name: 'White Rabbit'}
+  return string + this.name;
+}
+
+// Indirect invocations
+concatName.call(rabbit, "Hello "); // Hello White Rabbit
+concatName.apply(rabbit, ["Bye "]); // Bye White Rabbit
+*
+*
+*
+*********************/
+
+function Runner(name) {
+  console.log(this instanceof Rabbit); // => true
+  this.name = name;
+}
+
+function Rabbit(name, countLegs) {
+  console.log(this instanceof Rabbit); // => true
+  // Indirect invocation. Call parent constructor.
+  Runner.call(this, name);
+  this.countLegs = countLegs;
+}
+
+const myRabbit = new Rabbit("White Rabbit", 4);
+myRabbit; // {name: 'White Rabbit', countLegs: 4}
+
+// Runner.call(this, name) inside Rabbit makes an indirect call of the parent function to initialize the object.
+
+
